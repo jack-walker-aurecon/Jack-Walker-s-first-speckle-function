@@ -15,6 +15,8 @@ static class AutomateFunction
     FunctionInputs functionInputs
   )
   {
+      string ElementAssignment = "element-assignment";
+    string materialAssignment = "materials";
     Console.WriteLine("Starting execution");
     _ = typeof(ObjectsKit).Assembly; // INFO: Force objects kit to initialize
 
@@ -25,15 +27,8 @@ static class AutomateFunction
     var project = automationContext.AutomationRunData.ProjectId;
     var stream = automationContext.SpeckleClient.StreamGet(project);
 
-    string branchData = File.ReadAllText("/SpeckleAutomateDotnetExample/branches.json");
-    Branches? branches = JsonSerializer.Deserialize<Branches>(branchData);
-
-    if(branches == null){
-      automationContext.MarkRunFailed("The run failed as the branches data failed to be serialised");
-      return;
-    }
-    var element_assignment = await automationContext.SpeckleClient.BranchGet($"{stream.Id}", branches.ElementAssignment);
-    var material_assignment = await automationContext.SpeckleClient.BranchGet($"{stream.Id}", branches.Materials);
+    var element_assignment = await automationContext.SpeckleClient.BranchGet($"{stream.Id}", ElementAssignment);
+    var material_assignment = await automationContext.SpeckleClient.BranchGet($"{stream.Id}", materialAssignment);
 
     if(element_assignment == null)
     { 
