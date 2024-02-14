@@ -25,7 +25,7 @@ static class AutomateFunction
     var project = automationContext.AutomationRunData.ProjectId;
     var stream = automationContext.SpeckleClient.StreamGet(project);
 
-    string branchData = File.ReadAllText("branches.json");
+    string branchData = File.ReadAllText("./branches.json");
     Branches? branches = JsonSerializer.Deserialize<Branches>(branchData);
 
     if(branches == null){
