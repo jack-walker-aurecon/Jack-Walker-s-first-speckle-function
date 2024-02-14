@@ -15,15 +15,11 @@ static class AutomateFunction
     FunctionInputs functionInputs
   )
   {
-      string ElementAssignment = "element-assignment";
+    string ElementAssignment = "element-assignment";
     string materialAssignment = "materials";
     Console.WriteLine("Starting execution");
     _ = typeof(ObjectsKit).Assembly; // INFO: Force objects kit to initialize
 
-    Console.WriteLine("Receiving version");
-    var commitObject = await automationContext.ReceiveVersion();
-
-    Console.WriteLine("Received version: " + commitObject);
     var project = automationContext.AutomationRunData.ProjectId;
     var stream = automationContext.SpeckleClient.StreamGet(project);
 
