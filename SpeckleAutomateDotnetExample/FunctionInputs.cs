@@ -9,4 +9,5 @@ struct FunctionInputs
 {
   [Required]
   public string SpeckleTypeToCount;
+  public string? DataEndPoint;
 }
